@@ -40,6 +40,18 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="540dp"
             android:text="恢复默认" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="540dp"
+            android:text="固定背景" />
     </LinearLayout>
 
 

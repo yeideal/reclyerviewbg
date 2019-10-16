@@ -1,6 +1,7 @@
 package com.leaf.reclyerviewbg;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -11,7 +12,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
@@ -20,6 +20,9 @@ import com.bumptech.glide.request.target.Target;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 随着背景滚动
+ */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     RecyclerView recyclerView;
     private BgDecoration bgDecoration;
@@ -32,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         recyclerView = findViewById(R.id.recyclerView);
         findViewById(R.id.button).setOnClickListener(this);
         findViewById(R.id.button2).setOnClickListener(this);
+        findViewById(R.id.button3).setOnClickListener(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
@@ -59,43 +63,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 bgDecoration.clearMap();
                 adapter.notifyDataSetChanged();
                 break;
+            case R.id.button3:
+                startActivity(new Intent(this, MainActivity2.class));
+                break;
         }
     }
 
     private void setBg(final Context context, final String url) {
-//        AsyncTask<Void, Void, Bitmap> task = new AsyncTask<Void, Void, Bitmap>() {
-//          g  @Override
-//            protected Bitmap doInBackground(Void... voids) {
-//                Bitmap bitmap = null;
-//                try {
-//                    bitmap = Glide.with(context).asBitmap()
-//                            .load(url).submit().get();
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                } catch (ExecutionException e) {
-//                    e.printStackTrace();
-//                }
-//                return bitmap;
-//            }
-//
-//            @Override
-//            protected void onPostExecute(Bitmap bitmap) {
-//                if (bitmap != null) {
-//                    bgDecoration.setBmp(bitmap);
-//                    adapter.notifyDataSetChanged();
-//                }
-//            }
-//        };
-//        task.execute();
-        RequestManager requestManager = Glide.with(context);
-        requestManager.load(url).listener(new RequestListener<Drawable>() {
+        Glide.with(context).load(url).listener(new RequestListener<Drawable>() {
             @Override
-            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+            public boolean onLoadFailed(@Nullable GlideException e, Object model,
+                                        Target<Drawable> target, boolean isFirstResource) {
                 return false;
             }
 
             @Override
-            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target,
+                                           DataSource dataSource, boolean isFirstResource) {
                 Bitmap bitmap = BitmapUtils.drawableToBitmap(resource);
                 bgDecoration.setBmp(bitmap);
                 bgDecoration.clearMap();

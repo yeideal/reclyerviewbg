@@ -19,6 +19,11 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".MainActivity2"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
